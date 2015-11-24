@@ -144,6 +144,13 @@ public class JSONSearchServlet extends HttpServlet {
 
             result.put(ATTRIBUTE_RESULTS, resultsArray);
         }
+	resp.addHeader("Access-Control-Allow-Origin", "*");
+	resp.addHeader("Access-Control-Allow-Methods", "GET");
+	resp.addHeader("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Cache-Control");
+	//System.out.println("Origin: " + resp.containsHeader("Access-Control-Allow-Origin"));
+	//System.out.println("Method: " + resp.containsHeader("Access-Control-Allow-Methods"));
+	//System.out.println("Allow-Header: " + resp.containsHeader("Access-Control-Allow-Headers"));
+	//System.out.println("faywong, resp:" + resp.toString());
         resp.getWriter().write(result.toString());
     }
 }

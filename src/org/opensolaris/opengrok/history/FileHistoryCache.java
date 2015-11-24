@@ -592,7 +592,9 @@ class FileHistoryCache implements HistoryCache {
         try {
             writer = new BufferedWriter(new OutputStreamWriter(
                   new FileOutputStream(getRepositoryCachedRevPath(repository))));
-            writer.write(rev);
+	    if (writer != null) {
+            	writer.write(rev);
+	    }
         } catch (IOException ex) {
             logger.log(Level.WARNING, "cannot write latest cached revision to file: " +
                 ex.getCause());
