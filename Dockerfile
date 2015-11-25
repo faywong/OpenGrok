@@ -2,7 +2,7 @@ FROM tifayuki/java:7
 MAINTAINER tenxcloud.com
 
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends wget pwgen ca-certificates && \
+    apt-get install -yq --no-install-recommends wget pwgen ca-certificates ant&& \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -19,11 +19,14 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION
 
 ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
 ADD run.sh /run.sh
-ADD webapps.tar /opt/data
 RUN rm -rf /tomcat/webapps/*
 RUN chmod +x /*.sh
 
 VOLUME /tomcat/webapps
+
+RUN ant package
+
+ADD dist/source.war /tomcat/webapps/source.war
 
 EXPOSE 8080
 CMD ["/run.sh"]
