@@ -21,7 +21,6 @@ ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
 ADD run.sh /run.sh
 RUN rm -rf /tomcat/webapps/*
 RUN chmod +x /*.sh
-RUN ant package
 ADD dist/source.war /tomcat/webapps/source.war
 
 VOLUME /tomcat/webapps
